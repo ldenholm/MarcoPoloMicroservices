@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Catalog.API.Settings;
 using Microsoft.Extensions.Options;
 using Catalog.API.Data.Interfaces;
+using Catalog.API.Repositories;
+using Catalog.API.Repositories.Interfaces;
 
 namespace Catalog.API
 {
@@ -35,6 +37,7 @@ namespace Catalog.API
             sp.GetRequiredService<IOptions<CatalogDatabaseSettings>>().Value);
 
             services.AddTransient<ICatalogContext, CatalogContext>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
