@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 /*
  * We will need to create the following methods to satisfy our application needs:
- * List products and categories (api/v1/Catalog),
- * Get product by Id (api/v1/Catalog/{id}),
- * Get products by Category (api/v1/Catalog/GetProductByCategory/{category}),
+ * Name | URL | HTTPMethod
+ * List products and categories (api/v1/Catalog) GET,
+ * Get product by Id (api/v1/Catalog/{id}) GET,
+ * Get products by Category (api/v1/Catalog/GetProductByCategory/{category}) GET,
  * Create a product (api/v1/Catalog) POST,
  * Update a product (api/v1/Catalog) PUT,
  * Delete a product (api/v1/Catalog/{id}) DEL
