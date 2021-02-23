@@ -13,8 +13,12 @@ namespace Catalog.API.Data.Interfaces
         public IMongoCollection<Product> Products { get;  }
         public CatalogContext(ICatalogDatabaseSettings settings)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            //var client = new MongoClient(settings.ConnectionString);
+            var connectionString = "mongodb://localhost:27017/marcopolo-mongo?readPreference=primary";
+            var mongoUrl = new MongoUrl(connectionString);
+
+            var client = new MongoClient(mongoUrl);
+            var database = client.GetDatabase(mongoUrl.DatabaseName);
 
             Products = database.GetCollection<Product>("Product");
             CatalogContextSeed.SeedData(Products);
