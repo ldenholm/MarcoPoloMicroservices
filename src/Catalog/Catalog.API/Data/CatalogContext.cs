@@ -10,17 +10,17 @@ namespace Catalog.API.Data.Interfaces
 {
     public class CatalogContext : ICatalogContext
     {
+        private readonly IMongoDatabase _db;
         public IMongoCollection<Product> Products { get;  }
+
         public CatalogContext(ICatalogDatabaseSettings settings)
         {
             //var client = new MongoClient(settings.ConnectionString);
-            var connectionString = "mongodb://localhost:27017/marcopolo-mongo?readPreference=primary";
-            var mongoUrl = new MongoUrl(connectionString);
+            var client = new MongoClient("mongodb://root:test@ds011111.mongolab.com:11111/CatalogDb?connect=replicaSet");
 
-            var client = new MongoClient(mongoUrl);
-            var database = client.GetDatabase(mongoUrl.DatabaseName);
+            _db = client.GetDatabase(settings.Database);
 
-            Products = database.GetCollection<Product>("Product");
+            Products = _db.GetCollection<Product>("Products");
             CatalogContextSeed.SeedData(Products);
         }
     }

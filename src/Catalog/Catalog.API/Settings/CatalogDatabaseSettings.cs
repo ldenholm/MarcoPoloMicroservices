@@ -7,8 +7,21 @@ namespace Catalog.API.Settings
 {
     public class CatalogDatabaseSettings : ICatalogDatabaseSettings
     {
-        public string ConnectionString { get; set; }
-        public string DatabaseName { get; set; }
-        public string CollectionName { get; set; }
+        public string Database { get; set; }
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
+        public string ConnectionString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(User) || string.IsNullOrEmpty(Password))
+                {
+                    return $@"mongodb://{Host}:{Port}?connect=replicaSet";
+                }
+                return $@"mongodb://{User}:{Password}@{Host}:{Port}?connect=replicaSet";
+            }
+        }
     }
 }
